@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QR Code Generator</title>
+
+    <style>
+        h1,
+        h3 {
+            color: darkcyan;
+        }
+
+        body,
+        header {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: lightgrey;
+        }
+
+        main {
+            text-align: center;
+        }
+
+        #qrCodeInput {
+            width: 300px;
+            padding: 15px;
+            margin-top: 20px;
+            border: 2px solid darkcyan;
+            border-radius: 5px;
+            font-size: 16px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        #qrCodeTextDisplay {
+            font-family: monospace;
+            white-space: pre-wrap;
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+
+        body {
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh; /* Ensure the body takes up at least the full viewport height */
+          margin:   
+ 0; /* Remove default margins */
+    }
+
+    main {
+      flex: 1; /* Allow 'main' to expand and push the footer to the bottom */
+    }
+
+    footer {
+      background-color: #f0f0f0; /* Add a subtle background color */
+      padding: 10px;
+      text-align: center;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Panagon Systems</h1>
+        <h3>QR code generator</h3>
+        <h3>Copy the pump info from the Build Screen in Helix and paste in the box below.</h3>
+    </header>
+    
+    <main>
+        <div id="qrcode" align="center"></div>
+        <input type="text" id="qrCodeInput" placeholder="Enter text to generate QR code">
+        <div id="qrCodeTextDisplay"></div>
+    </main>
+    <footer>
+    <p align="below">Made with JS and ❤️ @ Panagon Systems Inc. &copy; 2024</p>
+  </footer>
+    <script>
+        const qrCodeContainer = document.getElementById('qrcode');
+        const inputBox = document.getElementById('qrCodeInput');
+        const displayBox = document.getElementById('qrCodeTextDisplay');
+
+        // Initial QR code for panagonsystems.org
+        new QRCode(qrCodeContainer, "https://panagonsystems.com");
+        displayBox.textContent = "https://panagonsystems.com";
+
+        inputBox.addEventListener('input', generateQRCode);
+
+        function generateQRCode() {
+            qrCodeContainer.innerHTML = ''; // Clear previous QR code
+
+            new QRCode(qrCodeContainer, {
+                text: inputBox.value,
+                width: 256,
+                height: 256,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+
+            // Update the display box
+            displayBox.textContent = inputBox.value;
+        }
+    </script>
+</body>
+
+</html>
